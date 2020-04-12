@@ -3,7 +3,7 @@ import {Form, Button, Row, Col} from 'react-bootstrap';
 import {authFormType} from '../types.module';
 import {connect} from 'react-redux';
 import Redux from 'redux';
-import {register} from '../../store/actions';
+import {auth} from '../../store/actions';
 import * as authActionTypes from '../../store/types/auth.module'
 import * as generalTypes from '../types.module';
 import { Link } from 'react-router-dom';
@@ -145,7 +145,7 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
 })
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
     return{
-        onRegister: (authData: authActionTypes.registerData) => dispatch(register(authData))
+        onRegister: (authData: authActionTypes.registerData) => dispatch(auth(authData, 'register'))
     }
 }
 export default connect(null, mapDispatchToProps)(Register);

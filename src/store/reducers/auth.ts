@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import {authState, registerAction} from '../types/auth.module';
+import {authState, authAction} from '../types/auth.module';
 const initialState: authState  = {
     id: null,
     token: null,
@@ -10,9 +10,9 @@ const initialState: authState  = {
     loading: false
 }
 
-const authReducer: (state: authState, action: registerAction) => authState = (state = initialState, action) => {
+const authReducer: (state: authState, action: authAction) => authState = (state = initialState, action) => {
     switch(action.type){
-        case actionTypes.REGISTER_START:
+        case actionTypes.AUTH_START:
             return {
                 ...state,
                 loading: true
@@ -42,11 +42,6 @@ const authReducer: (state: authState, action: registerAction) => authState = (st
                 email: null,
                 error: null,
                 loading: false
-            }
-        case actionTypes.LOGIN_START: 
-            return{
-                loading: true,
-                ...state
             }
         default:
             return state;

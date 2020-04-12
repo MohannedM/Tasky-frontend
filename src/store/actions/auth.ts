@@ -1,16 +1,17 @@
 import * as actionTypes from './actionTypes';
-import {registerData, registerType, registerStartType, authSuccessType, authState, authFailType, checkAuthType, setLogoutTimerType, clearAuthType, loginData, loginType, loginStartType} from '../types/auth.module';
+import { authSuccessType, authState, authFailType, checkAuthType, setLogoutTimerType, clearAuthType, authType, authDataType, authStartType, logoutType} from '../types/auth.module';
 
-export const register: (authData: registerData) => registerType = (authData: registerData) => {
+export const auth: (authData: authDataType, extension: 'register' | 'login') => authType = (authData: authDataType, extension: 'register' | 'login') => {
     return{
-        type: actionTypes.REGISTER,
-        authData
+        type: actionTypes.AUTH,
+        authData,
+        extension
     }
 }
 
-export const registerStart: () => registerStartType = () => {
+export const authStart: () => authStartType = () => {
     return{
-        type: actionTypes.REGISTER_START
+        type: actionTypes.AUTH_START
     }
 }
 
@@ -47,15 +48,8 @@ export const clearAuth: () => clearAuthType = () => {
     }
 }
 
-export const login: (authData: loginData) => loginType = (authData) => {
+export const logout: () => logoutType = () => {
     return{
-        type: actionTypes.LOGIN,
-        authData
-    }
-}
-
-export const loginStart: () => loginStartType = () => {
-    return{
-        type: actionTypes.LOGIN_START
+        type: actionTypes.LOGOUT
     }
 }

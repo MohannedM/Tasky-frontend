@@ -1,1 +1,1 @@
-export {register, registerStart, authSuccess, authFail, checkAuth, setLogoutTimer, clearAuth} from './auth';
+export {auth, authStart, authSuccess, authFail, checkAuth, setLogoutTimer, clearAuth, logout} from './auth';

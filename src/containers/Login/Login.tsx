@@ -6,7 +6,7 @@ import Redux from 'redux';
 import * as authActionTypes from '../../store/types/auth.module'
 import * as generalTypes from '../types.module';
 import { Link } from 'react-router-dom';
-import { login } from '../../store/actions/auth';
+import { auth } from '../../store/actions/auth';
 
 const Login: React.FC<generalTypes.loginProps> = React.memo(props => {
 
@@ -114,7 +114,7 @@ const Login: React.FC<generalTypes.loginProps> = React.memo(props => {
 })
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
     return{
-        onLogin: (authData: authActionTypes.loginData) => dispatch(login(authData))
+        onLogin: (authData: authActionTypes.loginData) => dispatch(auth(authData, 'login'))
     }
 }
 export default connect(null, mapDispatchToProps)(Login);

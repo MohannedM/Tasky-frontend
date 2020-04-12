@@ -16,12 +16,18 @@ export interface taskyProps{
 }
 
 export interface registerProps{
-    onRegister: (authData: authActionTypes.registerData) => authActionTypes.registerType;
+    onRegister: (authData: authActionTypes.registerData) => authActionTypes.authType;
 }
 
 export interface loginProps{
-    onLogin: (authData: authActionTypes.loginData) => authActionTypes.loginType;
+    onLogin: (authData: authActionTypes.loginData) => authActionTypes.authType;
 }
+
+
+export interface logoutProps{
+    onLogout: () => authActionTypes.logoutType;
+}
+
 
 export interface connectAuthState{
     auth: authActionTypes.authState

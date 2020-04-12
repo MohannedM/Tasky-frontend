@@ -3,6 +3,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import Dashboard from '../Dashboard/Dashboard';
 import { Route, Switch } from 'react-router-dom';
 import Login from '../Login/Login';
+import Logout from '../Logout/Logout';
 import Register from '../Register/Register';
 import CustomNavbar from '../../components/CustomNavbar/CustomNavbar';
 import CustomFooter from '../../components/CustomFooter/CustomFooter';
@@ -20,6 +21,7 @@ const Tasky: React.FC<taskyProps> = React.memo(props => {
     let routes = (
         <Switch>
             <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
             <Route path="/register" component={Register} />
             <Route path="/" exact component={LandingPage} />
         </Switch>
@@ -27,6 +29,7 @@ const Tasky: React.FC<taskyProps> = React.memo(props => {
     if(props.isAuth){
         routes = (
             <Switch>
+                <Route path="/logout" component={Logout} />
                 <Route path="/" exact component={Dashboard} />
             </Switch>
         );
