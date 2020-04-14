@@ -11,15 +11,19 @@ export interface authFormType{
 }
 
 export interface taskyProps{
-    isAuth: boolean,
-    onCheckAuth: () => authActionTypes.checkAuthType
+    isAuth: boolean;
+    firstName: string | null;
+    lastName?: string | null;
+    onCheckAuth: () => authActionTypes.checkAuthType;
 }
 
 export interface registerProps{
+    isAuth: boolean;
     onRegister: (authData: authActionTypes.registerData) => authActionTypes.authType;
 }
 
 export interface loginProps{
+    isAuth: boolean;
     onLogin: (authData: authActionTypes.loginData) => authActionTypes.authType;
 }
 
@@ -28,10 +32,17 @@ export interface logoutProps{
     onLogout: () => authActionTypes.logoutType;
 }
 
+export interface navbarProps{
+    isAuth: boolean;
+    first_name: string | null;
+    last_name?: string | null;
+}
 
 export interface connectAuthState{
     auth: authActionTypes.authState
 }
+
+
 
 
 

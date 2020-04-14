@@ -10,6 +10,7 @@ import CustomFooter from '../../components/CustomFooter/CustomFooter';
 import {connectAuthState, taskyProps} from '../types.module';
 import {connect} from 'react-redux';
 import {checkAuth} from '../../store/actions';
+import NotFound from '../NotFound/NotFound';
 import Redux from 'redux';
 
 
@@ -19,24 +20,32 @@ const Tasky: React.FC<taskyProps> = React.memo(props => {
     });
     
     let routes = (
-        <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/register" component={Register} />
-            <Route path="/" exact component={LandingPage} />
-        </Switch>
+        <React.Fragment>
+            <Switch>
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/" exact component={LandingPage} />
+                <Route path="/" component={NotFound} />
+            </Switch>
+        </React.Fragment>
     );
     if(props.isAuth){
         routes = (
-            <Switch>
-                <Route path="/logout" component={Logout} />
-                <Route path="/" exact component={Dashboard} />
-            </Switch>
+            <React.Fragment>
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/logout" component={Logout} />
+                    <Route path="/" exact component={Dashboard} />
+                    <Route path="/" component={NotFound} />
+                </Switch>
+            </React.Fragment>
         );
     }
     return (
     <React.Fragment>
-        <CustomNavbar />
+        <CustomNavbar isAuth={props.isAuth} first_name={props.firstName} last_name={props.lastName} />
         {routes}
         <CustomFooter />
     </React.Fragment>
@@ -45,7 +54,9 @@ const Tasky: React.FC<taskyProps> = React.memo(props => {
 
 const mapStateToProps = (state: connectAuthState) => {
     return {
-        isAuth: state.auth.token !== null
+        isAuth: state.auth.token !== null,
+        firstName: state.auth.firstName,
+        lastName: state.auth.lastName
     }
 }
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {

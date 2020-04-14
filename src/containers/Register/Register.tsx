@@ -6,7 +6,7 @@ import Redux from 'redux';
 import {auth} from '../../store/actions';
 import * as authActionTypes from '../../store/types/auth.module'
 import * as generalTypes from '../types.module';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
 
@@ -100,9 +100,8 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
 
 
     return(
-        <React.Fragment>
-
         <Row className="py-5">
+            {props.isAuth ? <Redirect to="/" /> : null}
             <Col xs={6} className="primary-light p-5 mx-auto shadow-lg p-3 mb-5 rounded-extra">
                 <Form>
                     <Form.Group controlId="formBasicFName">
@@ -140,12 +139,16 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
                 </Form>
             </Col>
         </Row>
-        </React.Fragment>
     )
-})
+});
+const mapStateToProps = (state: generalTypes.connectAuthState) => {
+    return {
+        isAuth: state.auth.token !== null
+    }
+}
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
     return{
         onRegister: (authData: authActionTypes.registerData) => dispatch(auth(authData, 'register'))
     }
 }
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
