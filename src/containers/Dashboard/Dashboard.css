@@ -2,3 +2,12 @@
     height: 85vh;
     width: 100vw;
 }
+
+.nav-link{
+    color: #001c7f;
+}
+
+.scorllable-div{
+    overflow-y: scroll;
+    height: 60vh;
+}

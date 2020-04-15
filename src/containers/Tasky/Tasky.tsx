@@ -37,6 +37,9 @@ const Tasky: React.FC<taskyProps> = React.memo(props => {
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route path="/logout" component={Logout} />
+                    <Route path="/tasks" component={Dashboard} />
+                    <Route path="/tasks/create" component={Dashboard} />
+                    <Route path="/tasks/assigned" component={Dashboard} />
                     <Route path="/" exact component={Dashboard} />
                     <Route path="/" component={NotFound} />
                 </Switch>

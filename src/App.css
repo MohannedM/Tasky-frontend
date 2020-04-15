@@ -132,7 +132,7 @@ html, body{
     padding-bottom: 2.5rem;
   }
   
-  .primary, .btn-primary{
+  .primary, .btn-primary, .badge-primary{
       background-color: #001c7f !important;
       border-color: #001c7f !important;
   }
@@ -140,8 +140,9 @@ html, body{
   .text-primary{
     color: #001c7f !important;
   }
-  .primary-light{
+  .primary-light, .badge-primary-light{
     background-color: #001c7fcd;
+    color: #fff;
   }
   .showcase-img-1{
     background-image: url(./img/bg-showcase-1.jpg);
