@@ -60,4 +60,16 @@ export interface logoutType{
     type: typeof actionTypes.LOGOUT
 }
 
+export interface authResponseType{
+    data: {
+        user: {
+            id: string;
+            token: string;
+            firstName: string;
+            lastName: string;
+            email: string;
+        }
+    }
+}
+
 export type authAction =  authStartType | authFailType | authSuccessType | clearAuthType ;

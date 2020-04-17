@@ -1,13 +1,13 @@
 import {put, delay} from 'redux-saga/effects';
 import { authSuccess, authFail} from '../actions';
-import {checkAuthType, setLogoutTimerType, authType, logoutType} from '../types/auth.module';
+import {checkAuthType, setLogoutTimerType, authType, logoutType, authResponseType} from '../types/auth.module';
 import axios from 'axios';
 import { clearAuth, setLogoutTimer, authStart, logout } from '../actions/auth';
 
 export function* authSaga(action: authType){
     yield put(authStart());
     try{
-        const response = yield axios.post("http://127.0.0.1:8080/auth/" + action.extension,{
+        const response: authResponseType = yield axios.post("http://127.0.0.1:8080/auth/" + action.extension,{
             ...action.authData
         });
         const expirationTime = new Date().getTime() + (3600*1000);
