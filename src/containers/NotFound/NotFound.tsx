@@ -3,8 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookDead } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-
-const NotFound: React.FC = props => {
+import {NotFoundProps} from './NotFound.module'
+const NotFound: React.FC<NotFoundProps> = props => {
     return(
         <Container className="mt-5 pt-5">
             <Row>

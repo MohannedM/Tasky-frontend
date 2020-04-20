@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { authSuccessType, authState, authFailType, checkAuthType, setLogoutTimerType, clearAuthType, authType, authDataType, authStartType, logoutType} from '../types/auth.module';
+import { authSuccessType, authState, authFailType, checkAuthType, setLogoutTimerType, clearAuthType, authType, authDataType, authStartType, logoutType, dismissAuthErrorType} from '../types/auth.module';
 
 export const auth: (authData: authDataType, extension: 'register' | 'login') => authType = (authData: authDataType, extension: 'register' | 'login') => {
     return{
@@ -51,5 +51,11 @@ export const clearAuth: () => clearAuthType = () => {
 export const logout: () => logoutType = () => {
     return{
         type: actionTypes.LOGOUT
+    }
+}
+
+export const dismissAuthError: () => dismissAuthErrorType = () => {
+    return{
+        type: actionTypes.DISMISS_AUTH_ERROR
     }
 }

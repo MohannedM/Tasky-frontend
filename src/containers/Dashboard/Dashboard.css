@@ -8,6 +8,6 @@
 }
 
 .scorllable-div{
-    overflow-y: scroll;
-    height: 60vh;
+    overflow-y: auto;
+    height: 62vh;
 }

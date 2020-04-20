@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {Form, Button, Row, Col} from 'react-bootstrap';
-import {authFormType} from '../types.module';
+import {validationFormType} from '../types.module';
 import {connect} from 'react-redux';
 import Redux from 'redux';
-import {auth} from '../../store/actions';
+import {auth, dismissAuthError} from '../../store/actions';
 import * as authActionTypes from '../../store/types/auth.module'
 import * as generalTypes from '../types.module';
 import { Link, Redirect } from 'react-router-dom';
+import CustomModal from '../../components/CustomModal/CutsomModal';
 
 const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
 
-    const [registerForm, setRegisterForm] = useState<authFormType>({
+    const [registerForm, setRegisterForm] = useState<validationFormType>({
     first_name: {
         value: '',
         valid: false,
@@ -63,7 +64,7 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
     const setInputHandler = (event: React.SyntheticEvent, property: 'first_name' | 'last_name' | 'email' | 'password' | 'confirm_password') => {
         event.persist();
         if((event.target as HTMLInputElement).value.length < registerForm[property].minLength || (event.target as HTMLInputElement).value.length > registerForm[property].maxLength){
-            setRegisterForm((prevValue: authFormType) => {
+            setRegisterForm((prevValue: validationFormType) => {
                 return{
                     ...prevValue,
                     [property]:{
@@ -75,7 +76,7 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
                 }
             });
         }else{
-            setRegisterForm((prevValue: authFormType) => {
+            setRegisterForm((prevValue: validationFormType) => {
                 return{
                     ...prevValue,
                     [property]:{
@@ -101,6 +102,7 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
 
     return(
         <Row className="py-5">
+            <CustomModal error={props.error!} handleClose={props.onDismissError} />
             {props.isAuth ? <Redirect to="/" /> : null}
             <Col xs={6} className="primary-light p-5 mx-auto shadow-lg p-3 mb-5 rounded-extra">
                 <Form>
@@ -127,8 +129,9 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
                     </Form.Group>
                     <Row className="my-3">
                         <Col xs={12} md={6}>
-                            <Button variant="light" className="text-primary" type="submit" onClick={registerHandler} disabled={!allValid}>
+                            <Button variant="light" className="text-primary" type="submit" onClick={registerHandler} disabled={!allValid || props.loading}>
                                 Register
+                                {props.loading ? <> &nbsp; <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> </> : null} 
                             </Button>
 
                         </Col>
@@ -143,12 +146,15 @@ const Register: React.FC<generalTypes.registerProps> = React.memo(props => {
 });
 const mapStateToProps = (state: generalTypes.connectAuthState) => {
     return {
-        isAuth: state.auth.token !== null
+        isAuth: state.auth.token !== null,
+        error: state.auth.error,
+        loading: state.auth.loading
     }
 }
 const mapDispatchToProps = (dispatch: Redux.Dispatch) => {
     return{
-        onRegister: (authData: authActionTypes.registerData) => dispatch(auth(authData, 'register'))
+        onRegister: (authData: authActionTypes.registerData) => dispatch(auth(authData, 'register')),
+        onDismissError: () => dispatch(dismissAuthError())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

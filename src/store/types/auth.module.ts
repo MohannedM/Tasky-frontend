@@ -72,4 +72,8 @@ export interface authResponseType{
     }
 }
 
-export type authAction =  authStartType | authFailType | authSuccessType | clearAuthType ;
+export interface dismissAuthErrorType{
+    type: typeof actionTypes.DISMISS_AUTH_ERROR
+}
+
+export type authAction =  authStartType | authFailType | authSuccessType | clearAuthType | dismissAuthErrorType;

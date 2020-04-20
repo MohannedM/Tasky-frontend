@@ -43,6 +43,11 @@ const authReducer: (state: authState, action: authAction) => authState = (state 
                 error: null,
                 loading: false
             }
+        case actionTypes.DISMISS_AUTH_ERROR:
+            return{
+                ...state,
+                error: null
+            }
         default:
             return state;
     }

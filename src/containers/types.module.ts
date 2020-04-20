@@ -1,7 +1,8 @@
 import * as authActionTypes from '../store/types/auth.module'
-export interface authFormType{
+import * as tasksActionTypes from '../store/types/tasks.module'
+export interface validationFormType{
     [inputType: string]: {
-        value: string | null;
+        value: string;
         minLength: number;
         maxLength: number;
         valid: boolean;
@@ -20,11 +21,17 @@ export interface taskyProps{
 export interface registerProps{
     isAuth: boolean;
     onRegister: (authData: authActionTypes.registerData) => authActionTypes.authType;
+    error?: string | null;
+    onDismissError: () => authActionTypes.dismissAuthErrorType;
+    loading?: boolean;
 }
 
 export interface loginProps{
     isAuth: boolean;
     onLogin: (authData: authActionTypes.loginData) => authActionTypes.authType;
+    error?: string | null;
+    onDismissError: () => authActionTypes.dismissAuthErrorType;
+    loading?: boolean;
 }
 
 
@@ -39,7 +46,22 @@ export interface navbarProps{
 }
 
 export interface connectAuthState{
-    auth: authActionTypes.authState
+    auth: authActionTypes.authState;
+}
+
+export interface connectTasksState{
+    tasks: tasksActionTypes.tasksState;
+}
+
+export interface connectAllState extends connectAuthState, connectTasksState{
+
+}
+
+export interface usersInfoResponse{
+    users: null | {
+     id?: string;
+     name?: string;
+ }[]
 }
 
 
